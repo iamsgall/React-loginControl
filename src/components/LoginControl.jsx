@@ -5,7 +5,6 @@ import Greeting from './Greeting';
 
 export default function LoginControl() {
   let [isLoggedIn, setIsLoggedIn] = useState(true);
-  let btn;
 
   const handleLogoutClick = () => {
     setIsLoggedIn((isLoggedIn = false));
@@ -15,15 +14,17 @@ export default function LoginControl() {
     setIsLoggedIn((isLoggedIn = true));
   };
 
-  if (isLoggedIn) {
-    btn = <LogoutButton onClick={handleLogoutClick} />;
-  } else {
-    btn = <LoginButton onClick={handleLoginClick} />;
-  }
   return (
     <div>
       <Greeting isLoggedIn={isLoggedIn} />
-      {btn}
+      <p>
+        The user <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in
+      </p>
+      {isLoggedIn ? (
+        <LogoutButton onClick={handleLogoutClick} />
+      ) : (
+        <LoginButton onClick={handleLoginClick} />
+      )}
     </div>
   );
 }
